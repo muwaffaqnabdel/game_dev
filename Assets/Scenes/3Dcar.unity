@@ -985,8 +985,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000034332, y: -77}
-  m_SizeDelta: {x: 244.5867, y: 69.10858}
+  m_AnchoredPosition: {x: 0, y: -77.22604}
+  m_SizeDelta: {x: 419.54, y: 69.109}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &319112818
 MonoBehaviour:
@@ -1010,8 +1010,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Pengaturan
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2bebf521cc1262942a75bfe9c015a275, type: 2}
+  m_sharedMaterial: {fileID: 1914515767768924080, guid: 2bebf521cc1262942a75bfe9c015a275, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2169,7 +2169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -64.616, y: -77.113}
+  m_AnchoredPosition: {x: -59, y: -54}
   m_SizeDelta: {x: 72.7681, y: 68.883}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1324827897
@@ -2216,7 +2216,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103548194}
+      - m_Target: {fileID: 1522144491}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2467,7 +2467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1522144492
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2502,7 +2502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
