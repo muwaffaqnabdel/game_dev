@@ -109,6 +109,10 @@ public class PrometeoCarController : MonoBehaviour
       [Space(20)]
       //[Header("CONTROLS")]
       [Space(10)]
+      [Header("Joystick Controls")]
+      public bool useJoystick = false;
+      public Joystick joystick;
+
       //The following variables lets you to set up touch controls for mobile devices.
       public bool useTouchControls = false;
       public GameObject throttleButton;
@@ -270,15 +274,17 @@ public class PrometeoCarController : MonoBehaviour
     void Update()
     {
       
-      // TOGGLE CURSOR LOCK (ESC)
+      // UNLOCK CURSOR (ESC)
       if (Input.GetKeyDown(KeyCode.Escape))
       {
-          if (Cursor.lockState == CursorLockMode.Locked)
-          {
-              Cursor.lockState = CursorLockMode.None;
-              Cursor.visible = true;
-          }
-          else
+          Cursor.lockState = CursorLockMode.None;
+          Cursor.visible = true;
+      }
+
+      // LOCK CURSOR (CLICK SCREEN)
+      if (Cursor.lockState == CursorLockMode.None && Input.GetMouseButtonDown(0))
+      {
+          if (UnityEngine.EventSystems.EventSystem.current == null || !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
           {
               Cursor.lockState = CursorLockMode.Locked;
               Cursor.visible = false;
@@ -304,7 +310,61 @@ public class PrometeoCarController : MonoBehaviour
       In this part of the code we specify what the car needs to do if the user presses W (throttle), S (reverse),
       A (turn left), D (turn right) or Space bar (handbrake).
       */
-      if (useTouchControls && touchControlsSetup){
+      if (useJoystick && joystick != null)
+      {
+          // Handle Throttle / Reverse
+          if (joystick.Vertical > 0.2f)
+          {
+              CancelInvoke("DecelerateCar");
+              deceleratingCar = false;
+              GoForward();
+          }
+          else if (joystick.Vertical < -0.2f)
+          {
+              CancelInvoke("DecelerateCar");
+              deceleratingCar = false;
+              GoReverse();
+          }
+          else
+          {
+              ThrottleOff();
+              if (!deceleratingCar)
+              {
+                  InvokeRepeating("DecelerateCar", 0f, 0.1f);
+                  deceleratingCar = true;
+              }
+          }
+
+          // Handle Steering
+          if (joystick.Horizontal > 0.2f)
+          {
+              TurnRight();
+          }
+          else if (joystick.Horizontal < -0.2f)
+          {
+              TurnLeft();
+          }
+          else
+          {
+              if (steeringAxis != 0f)
+              {
+                  ResetSteeringAngle();
+              }
+          }
+
+          // Handle Handbrake
+          if (Input.GetKey(KeyCode.Space))
+          {
+              CancelInvoke("DecelerateCar");
+              deceleratingCar = false;
+              Handbrake();
+          }
+          if (Input.GetKeyUp(KeyCode.Space))
+          {
+              RecoverTraction();
+          }
+      }
+      else if (useTouchControls && touchControlsSetup){
 
         if(throttlePTI.buttonPressed){
           CancelInvoke("DecelerateCar");

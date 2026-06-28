@@ -5,8 +5,6 @@ public class PauseManager : MonoBehaviour
     [Header("UI Panel Settings")]
     public GameObject settingsPanel;
 
-    private bool isPaused = false;
-
     // Fungsi untuk membuka panel settings dan menjeda (pause) game
     public void OpenSettingsAndPause()
     {
@@ -14,7 +12,8 @@ public class PauseManager : MonoBehaviour
         {
             settingsPanel.SetActive(true);
             Time.timeScale = 0f; // Menghentikan waktu di dalam game (Freeze)
-            isPaused = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             Debug.Log("Game Paused");
         }
     }
@@ -26,25 +25,9 @@ public class PauseManager : MonoBehaviour
         {
             settingsPanel.SetActive(false);
             Time.timeScale = 1f; // Mengembalikan waktu game menjadi berjalan normal
-            isPaused = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             Debug.Log("Game Resumed");
-        }
-    }
-
-    // (Opsional) Mengizinkan player menekan tombol ESCAPE untuk buka/tutup setting
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused)
-            {
-                CloseSettingsAndResume();
-            }
-            else
-            {
-                // Pastikan panel settings tidak sedang aktif sebelum di-pause
-                OpenSettingsAndPause();
-            }
         }
     }
 

@@ -75,6 +75,14 @@ public class PrometeoEditor : Editor{
   private SerializedProperty turnLeftButton;
   private SerializedProperty handbrakeButton;
 
+  //
+  //
+  //JOYSTICK CONTROLS VARIABLES
+  //
+  //
+  private SerializedProperty useJoystick;
+  private SerializedProperty joystick;
+
   private void OnEnable(){
     prometeo = (PrometeoCarController)target;
     SO = new SerializedObject(target);
@@ -117,6 +125,9 @@ public class PrometeoEditor : Editor{
     turnRightButton = SO.FindProperty("turnRightButton");
     turnLeftButton = SO.FindProperty("turnLeftButton");
     handbrakeButton = SO.FindProperty("handbrakeButton");
+
+    useJoystick = SO.FindProperty("useJoystick");
+    joystick = SO.FindProperty("joystick");
 
   }
 
@@ -218,6 +229,23 @@ public class PrometeoEditor : Editor{
 
         EditorGUILayout.PropertyField(carEngineSound, new GUIContent("Car Engine Sound: "));
         EditorGUILayout.PropertyField(tireScreechSound, new GUIContent("Tire Screech Sound: "));
+
+    EditorGUILayout.EndToggleGroup();
+
+    //
+    //
+    //JOYSTICK CONTROLS
+    //
+    //
+
+    GUILayout.Space(25);
+    GUILayout.Label("JOYSTICK CONTROLS", EditorStyles.boldLabel);
+    GUILayout.Space(10);
+
+    useJoystick.boolValue = EditorGUILayout.BeginToggleGroup("Use joystick controls?", useJoystick.boolValue);
+    GUILayout.Space(10);
+
+        EditorGUILayout.PropertyField(joystick, new GUIContent("Joystick: "));
 
     EditorGUILayout.EndToggleGroup();
 
